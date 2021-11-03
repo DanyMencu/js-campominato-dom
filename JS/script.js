@@ -34,13 +34,14 @@ setBtn.addEventListener('click',() => {
             cellsPerSide = 7;
     }
 
-    //Gen bombs
-    const bombList = genBombs ( cellsNumber, 16 );
+    //Gen bombs list
+    const bombList = genBombs( cellsNumber, 1 );
     console.log('Bombe scelte', bombList);
 
     //Attempts list
     const attempts = [];
     const maxAttempts = cellsNumber - bombList.length;
+    console.log('Tentativi possibili', maxAttempts);
 
     //Gen grid parent
     const grid = document.createElement('div');
@@ -49,7 +50,7 @@ setBtn.addEventListener('click',() => {
     //Gen square
     for (let i = 1; i <= cellsNumber; i++) {
         //Gen single square
-        const square = createGridSquare (i, cellsPerSide);
+        const square = createGridSquare(i, cellsPerSide);
         
         //Add click event
         square.addEventListener('click', () => {
@@ -67,7 +68,7 @@ setBtn.addEventListener('click',() => {
 * Functions
 */
 // Create square
-function createGridSquare (num, cells) {
+function createGridSquare(num, cells) {
         const node = document.createElement('div');
         node.classList.add('square');
         node.style.width = `calc( 100% / ${cells} )`;
@@ -78,8 +79,8 @@ function createGridSquare (num, cells) {
         return node;
 }
 
-// Generate a bomb list
-function genBombs (totCells, totBombs) {
+// Gen bomb list
+function genBombs(totCells, totBombs) {
     // 16 random unique numbers
 
     const bombs = [];
@@ -97,7 +98,7 @@ function genBombs (totCells, totBombs) {
 }
 
 // Gen random number
-function getRandomNum (min, max) {
+function getRandomNum(min, max) {
     return Math.floor( Math.random() * (max - min + 1) ) + min;
 }
 
@@ -109,10 +110,10 @@ function handleSquareClick(square, bombList, attempts, maxAttempts) {
     //Find a bomb?
     if ( bombList.includes(number) ) {
         console.log('End game');
-        endGame (bombList, attempts, maxAttempts);
+        endGame(bombList, attempts, maxAttempts);
     }
     //Not a bomb and is a new number
-    else if ( attempts.includes(number) ) {
+    else if ( !attempts.includes(number) ) {
         //Add background colora
         square.classList.add('safe');
         //Add number to attempts lista
@@ -121,6 +122,38 @@ function handleSquareClick(square, bombList, attempts, maxAttempts) {
         //Chech if attempts list length is equal to max attempts
         if (attempts.length === maxAttempts) {
             console.log('U win!');
+            endGame(bombList, attempts, maxAttempts);
         }
     }
+}
+
+//End game funbction
+function endGame(bombList, attempts, maxAttempts) {
+    //Get all square
+    const squares = document.querySelectorAll('.square');
+    //Show all bombs
+    for (let i = 0; i < squares.length; i++) {
+        const square = squares[i];
+        const squareValue = parseInt( square.innerHTML );
+
+        if ( bombList.includes(squareValue) ) {
+            square.classList.add('bomb');
+        }
+    }
+
+    //GOOD end game
+    let message = `Complimenti hai vinto! Hai indovinato i ${maxAttempts} tentativi validi.`
+    //BAD end game
+    if ( attempts.length < maxAttempts ) {
+        message = `Purtroppo hai perso XD Hai indovinato solamente ${attempts.length} volte. Ritenta pivello...`
+    }
+
+    //Output endgame message
+    const messageOutput = document.createElement('div');
+    messageOutput.append(message);
+
+    document.querySelector('.wrap-grid').append(messageOutput);
+
+    //Disable the pointer
+    document.querySelector('.grid').classList.add('end-game');
 }

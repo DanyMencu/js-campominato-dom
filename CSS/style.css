@@ -54,6 +54,10 @@ body {
     margin: 20px auto 40px;
 }
 
+.grid.end-game .square {
+    pointer-events: none;
+}
+
 .square {
     display: flex;
     justify-content: center;
@@ -62,10 +66,20 @@ body {
     cursor: pointer;
 }
 
-.square.clicked {
-    background: #6495ed;
+.square.safe,
+.square.bomb {
     color: white;
+    pointer-events: none;
+}
+
+.square.safe {
+    background: #6495ed;
     box-shadow: 2px white inset;
+}
+
+.square.bomb {
+    background: #dc143c;
+    box-shadow: 2px black inset;
 }
 
 
