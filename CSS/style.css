@@ -1,0 +1,81 @@
+/* Generals */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #7fffd4;
+    text-align: center;
+}
+
+/* Utilities */
+
+.d-flex {
+    display: flex;
+}
+
+.i-center {
+    align-items: center;
+}
+
+.pr-1 {
+    padding-right: 1rem;
+}
+
+.px-1 {
+    padding: 0 1rem;
+}
+
+/* Header */
+
+.toolbar {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.toolbar img {
+    width: 60px;
+}
+
+/* Main */
+
+.grid {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto 40px;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+
+.square.clicked {
+    background: #6495ed;
+    color: white;
+    box-shadow: 2px white inset;
+}
+
+
+/* Footer */
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 0.5rem;
+    text-align: left;
+    background-color: #fff;
+}
