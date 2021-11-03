@@ -38,23 +38,25 @@ setBtn.addEventListener('click',() => {
     const grid = document.createElement('div');
     grid.classList.add('grid');
 
-    //Add grid
-    wrapGrid.append(grid);
-
     //Gen square
     for (let i = 1; i <= cellsNumber; i++) {
         const square = createGridSquare (i, cellsPerSide);
-
+        
         square.addEventListener('click', () => {
             square.classList.add('clicked');
         });
-
+        
         grid.append(square);
     }
+
+    //Add grid
+    wrapGrid.append(grid);
 });
 
-//Functions
-
+/* 
+* Functions
+*/
+// Create square
 function createGridSquare (num, cells) {
         const node = document.createElement('div');
         node.classList.add('square');
@@ -64,4 +66,27 @@ function createGridSquare (num, cells) {
         node.append(num);
 
         return node;
+}
+
+// Generate a bomb list
+function genBombs (totCells, totBombs) {
+    // 16 random unique numbers
+
+    const bombs = [];
+
+    while (bombs.lenght < totBombs) {
+        //Random numbers
+        const bombNum = getRandomNum(1, totCells);
+        //Check it's not in the bomb array
+        if ( !bombs.includes(bombNum) ) {
+            bombs.push(bombNum);
+        }
+    }
+
+    return bombs;
+}
+
+// Gen random number
+function getRandomNum (min, max) {
+    return Math.floor( Math.random() * (max - min + 1) ) + min;
 }
