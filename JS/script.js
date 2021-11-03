@@ -34,6 +34,14 @@ setBtn.addEventListener('click',() => {
             cellsPerSide = 7;
     }
 
+    //Gen bombs
+    const bombList = genBombs ( cellsNumber, 16 );
+    console.log('Bombe scelte', bombList);
+
+    //Attempts list
+    const attempts = [];
+    const maxAttempts = cellsNumber - bombList.length;
+
     //Gen grid parent
     const grid = document.createElement('div');
     grid.classList.add('grid');
@@ -74,7 +82,7 @@ function genBombs (totCells, totBombs) {
 
     const bombs = [];
 
-    while (bombs.lenght < totBombs) {
+    while (bombs.length < totBombs) {
         //Random numbers
         const bombNum = getRandomNum(1, totCells);
         //Check it's not in the bomb array
