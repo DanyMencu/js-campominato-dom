@@ -36,12 +36,10 @@ setBtn.addEventListener('click',() => {
 
     //Gen bombs list
     const bombList = genBombs( cellsNumber, 16 );
-    console.log('Bombe scelte', bombList);
 
     //Attempts list
     const attempts = [];
     const maxAttempts = cellsNumber - bombList.length;
-    console.log('Tentativi possibili', maxAttempts);
 
     //Gen grid parent
     const grid = document.createElement('div');
@@ -106,7 +104,6 @@ function getRandomNum(min, max) {
 function handleSquareClick(square, bombList, attempts, maxAttempts) {
     //Get square number
     const number = parseInt(square.innerHTML);
-    console.log(number);
     //Find a bomb?
     if ( bombList.includes(number) ) {
         endGame(bombList, attempts, maxAttempts);
@@ -117,7 +114,6 @@ function handleSquareClick(square, bombList, attempts, maxAttempts) {
         square.classList.add('safe');
         //Add number to attempts lista
         attempts.push(number);
-        console.log('Tentativi riusciti', attempts);
         //Chech if attempts list length is equal to max attempts
         if (attempts.length === maxAttempts) {
             endGame(bombList, attempts, maxAttempts);
