@@ -35,7 +35,7 @@ setBtn.addEventListener('click',() => {
     }
 
     //Gen bombs list
-    const bombList = genBombs( cellsNumber, 1 );
+    const bombList = genBombs( cellsNumber, 16 );
     console.log('Bombe scelte', bombList);
 
     //Attempts list
@@ -109,7 +109,6 @@ function handleSquareClick(square, bombList, attempts, maxAttempts) {
     console.log(number);
     //Find a bomb?
     if ( bombList.includes(number) ) {
-        console.log('End game');
         endGame(bombList, attempts, maxAttempts);
     }
     //Not a bomb and is a new number
@@ -121,7 +120,6 @@ function handleSquareClick(square, bombList, attempts, maxAttempts) {
         console.log('Tentativi riusciti', attempts);
         //Chech if attempts list length is equal to max attempts
         if (attempts.length === maxAttempts) {
-            console.log('U win!');
             endGame(bombList, attempts, maxAttempts);
         }
     }
@@ -149,7 +147,7 @@ function endGame(bombList, attempts, maxAttempts) {
     }
 
     //Output endgame message
-    const messageOutput = document.createElement('div');
+    const messageOutput = document.createElement('h2');
     messageOutput.append(message);
 
     document.querySelector('.wrap-grid').append(messageOutput);

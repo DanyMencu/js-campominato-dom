@@ -29,6 +29,10 @@ body {
     padding: 0 1rem;
 }
 
+.p-1 {
+    padding: 1rem;
+}
+
 /* Header */
 
 .toolbar {
@@ -51,7 +55,7 @@ body {
     height: 400px;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px auto 40px;
+    margin: 0 auto 20px;
 }
 
 .grid.end-game .square {
